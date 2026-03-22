@@ -1,22 +1,30 @@
 use std::io;
 
-fn main() {
-    let a = [1, 2, 3, 4, 5];
-
-    println!("Please enter an array index.");
-
-    let mut index = String::new();
+fn read_line() -> String {
+    let mut string = String::new();
 
     io::stdin()
-        .read_line(&mut index)
+        .read_line(&mut string)
         .expect("Failed to read line");
+
+    string
+}
+
+fn main() {
+    println!("Enter temperature in F.");
+
+    let temp_f = read_line();
     
-    let index: usize = index
+    let temp_f: f64 = temp_f
         .trim()
         .parse()
-        .expect("Index entered was not a number");
+        .expect("Temperature entered was not a number.");
+    
+    let temp_c = (temp_f - 32.0) * 5.0 / 9.0;
 
-    let element = a[index];
-
-    println!("The value of the element at index {index} is: {element}");
+    println!("Temperature {temp_f} Fahrenheit is {temp_c:.1} Celsius.");
+    
+    // let mut retry = String::new();
+    // println("Convert another temperature?");
+    // io::stdin()
 }
