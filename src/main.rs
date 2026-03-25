@@ -1,37 +1,9 @@
-use std::io;
-
-fn read_line() -> String {
-    let mut string = String::new();
-
-    io::stdin()
-        .read_line(&mut string)
-        .expect("Failed to read line");
-
-    string
+fn main() {
+	let s1 = String::from("hello");
+	let len = calculate_length(&s1);
+	println!("The length of '{s1}' is {len}.");
 }
 
-fn main() {
-    loop {
-        println!("Enter temperature in F.");
-    
-        let temp_f = read_line();
-        let temp_f: f64 = temp_f
-            .trim()
-            .parse()
-            .expect("Temperature entered was not a number.");
-        
-        let temp_c = (temp_f - 32.0) * 5.0 / 9.0;
-        println!("Temperature {temp_f} Fahrenheit is {temp_c:.1} Celsius.");
-        
-        println!("Convert another temperature? Enter 1 for yes, 0 for no.");
-        let retry = read_line();
-        let retry: i8 = retry
-            .trim()
-            .parse()
-            .expect("Entered input is not a number.");
-        
-        if retry == 0 {
-            break;
-        }
-    }
+fn calculate_length(s: &String) -> usize {
+	s.len()
 }
