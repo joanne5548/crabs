@@ -1,9 +1,15 @@
 fn main() {
-	let s1 = String::from("hello");
-	let len = calculate_length(&s1);
-	println!("The length of '{s1}' is {len}.");
+	let dangling_reference = dangle();
 }
 
-fn calculate_length(s: &String) -> usize {
-	s.len()
+// Bad
+fn dangle() -> &String {
+	let s = String::from("Hellaur!");
+	&s
+} // here, s goes out of scope, and the value is dropped.
+  // hence &s points to a freed memory!
+
+fn dangle() -> String {
+	let s = String::from("Hellaur!");
+	s // ownership is moved out
 }
